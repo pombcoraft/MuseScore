@@ -446,7 +446,8 @@ Ret Score::putNote(const Position& p, bool replace)
             return false;
         }
         auto ch = toChord(cr);
-        return !ch->notes().empty() && !ch->notes()[0]->tieBack() && ch->notes()[0]->tieFor();
+        return ((!ch->notes().empty() && !ch->notes()[0]->tieBack())
+                && (ch->notes()[0]->tieFor() && !ch->notes()[0]->tieFor()->isLaissezVib()));
     };
 
     bool addToChord = false;
