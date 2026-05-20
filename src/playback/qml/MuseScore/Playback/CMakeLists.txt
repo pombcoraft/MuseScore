@@ -62,6 +62,7 @@ qt_add_qml_module(playback_qml
         internal/MixerFaderSection.qml
         internal/MixerFxSection.qml
         internal/MixerMuteAndSoloSection.qml
+        internal/MixerUnMuteAndUnSoloSection.qml
         internal/MixerPanelSection.qml
         internal/MixerPanelToolbar.qml
         internal/MixerSoundSection.qml
