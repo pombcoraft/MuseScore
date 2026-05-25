@@ -825,6 +825,11 @@
     <autorepeat>0</autorepeat>
     </SC>
   <SC>
+    <key>unsolo-all</key>
+    <seq>Ctrl+Shift+S</seq>
+    <autorepeat>0</autorepeat>
+    </SC>
+  <SC>
     <key>system-break</key>
     <seq>Return</seq>
     <seq>Enter</seq>

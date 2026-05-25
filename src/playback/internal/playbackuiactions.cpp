@@ -206,6 +206,11 @@ const UiActionList PlaybackUiActions::s_mixerActions = {
              mu::context::UiCtxAny,
              mu::context::CTX_ANY,
              TranslatableString("action", "Unmute All Channels")
+             ),
+    UiAction("unsolo-all",
+             mu::context::UiCtxAny,
+             mu::context::CTX_ANY,
+             TranslatableString("action", "Unsolo All Channels")
              )
 };
 

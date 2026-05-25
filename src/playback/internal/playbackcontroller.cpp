@@ -70,6 +70,7 @@ static const ActionCode PLAY_CHORD_SYMBOLS_CODE("play-chord-symbols");
 static const ActionCode PLAYBACK_SETUP("playback-setup");
 static const ActionCode TOGGLE_HEAR_PLAYBACK_WHEN_EDITING_CODE("toggle-hear-playback-when-editing");
 static const ActionCode UNMUTE_ALL_CODE("unmute-all");
+static const ActionCode UNSOLO_ALL_CODE("unsolo-all");
 
 static AudioOutputParams makeReverbOutputParams()
 {
@@ -129,6 +130,7 @@ void PlaybackController::init()
     dispatcher()->reg(this, TOGGLE_HEAR_PLAYBACK_WHEN_EDITING_CODE, this, &PlaybackController::toggleHearPlaybackWhenEditing);
     dispatcher()->reg(this, "playback-reload-cache", this, &PlaybackController::reloadPlaybackCache);
     dispatcher()->reg(this, UNMUTE_ALL_CODE, this, &PlaybackController::unmuteAll);
+    dispatcher()->reg(this, UNSOLO_ALL_CODE, this, &PlaybackController::unsoloAll);
 
     m_onlineSoundsController->regActions();
 
@@ -966,14 +968,32 @@ void PlaybackController::unmuteAll()
         if (instrumentTrackId == notationPlayback()->metronomeTrackId()) {
             continue;
         }
-         INotationSoloMuteState::SoloMuteState new_state = trackSoloMuteState(instrumentTrackId);
+
+        INotationSoloMuteState::SoloMuteState new_state = m_notation->soloMuteState()->trackSoloMuteState(instrumentTrackId);
         if(new_state.mute == true) {
             new_state.mute = false;
-            setTrackSoloMuteState(instrumentTrackId,new_state);
-            updateSoloMuteStates();
 
+            m_notation->soloMuteState()->setTrackSoloMuteState(instrumentTrackId,new_state);
         }
     }
+
+    updateSoloMuteStates();
+}
+
+void PlaybackController::unsoloAll()
+{
+    InstrumentTrackIdSet existingTrackIdSet = notationPlayback()->existingTrackIdSet();
+
+    for (const InstrumentTrackId& instrumentTrackId : existingTrackIdSet) {
+
+        INotationSoloMuteState::SoloMuteState new_state = trackSoloMuteState(instrumentTrackId);
+        if(new_state.solo == true) {
+            new_state.solo = false;
+            setTrackSoloMuteState(instrumentTrackId,new_state);
+        }
+    }
+
+    updateSoloMuteStates();
 }
 
 void PlaybackController::openPlaybackSetupDialog()
