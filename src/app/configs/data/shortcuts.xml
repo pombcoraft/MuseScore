@@ -826,7 +826,7 @@
     </SC>
   <SC>
     <key>unsolo-all</key>
-    <seq>Ctrl+Shift+S</seq>
+    <seq>Ctrl+Shift+L</seq>
     <autorepeat>0</autorepeat>
     </SC>
   <SC>

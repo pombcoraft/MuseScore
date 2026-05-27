@@ -34,6 +34,8 @@ Item {
     property var model: undefined
     property int headerWidth: 98
     property bool headerVisible: true
+    property alias unMuteButton: unMuteAllButton
+    property alias unSoloButton: unSoloAllButton
 
     height: 28
     width: headerWidth

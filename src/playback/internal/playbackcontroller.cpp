@@ -973,7 +973,7 @@ void PlaybackController::unmuteAll()
         if(new_state.mute == true) {
             new_state.mute = false;
 
-            m_notation->soloMuteState()->setTrackSoloMuteState(instrumentTrackId,new_state);
+            setTrackSoloMuteState(instrumentTrackId,new_state);
         }
     }
 

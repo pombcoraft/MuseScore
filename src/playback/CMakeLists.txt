@@ -40,6 +40,8 @@ target_sources(playback PRIVATE
     internal/soundprofilesrepository.h
     internal/drumsetloader.cpp
     internal/drumsetloader.h
+    tests/unmuteAndUnsoloTest.qml
+    tests/unmuteUnsoloTest.cpp
 )
 
 if (MUE_BUILD_PLAYBACK_TESTS)
