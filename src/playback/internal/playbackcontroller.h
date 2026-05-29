@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <gtest/gtest_prod.h>
 #include "modularity/ioc.h"
 #include "async/asyncable.h"
 #include "actions/iactionsdispatcher.h"
@@ -36,7 +37,6 @@
 #include "audio/common/audiotypes.h"
 #include "interactive/iinteractive.h"
 #include "tours/itoursservice.h"
-
 #include "drumsetloader.h"
 
 #include "../iplaybackcontroller.h"
@@ -124,6 +124,9 @@ public:
     void setNotation(notation::INotationPtr notation) override;
     void setMasterNotation(notation::IMasterNotationPtr masterNotation);
 
+    void unmuteAll();
+    void unsoloAll();
+
     void setIsExportingAudio(bool exporting) override;
 
     bool canReceiveAction(const muse::actions::ActionCode& code) const override;
@@ -132,7 +135,24 @@ public:
     muse::async::Notification onlineSoundsChanged() const override;
     muse::Progress onlineSoundsProcessingProgress() const override;
 
+    void setNotationForTest(notation::INotationPtr notation,
+                            notation::IMasterNotationPtr masterNotation)
+    {
+        m_notation = notation;
+        m_masterNotation = masterNotation;
+    }
+
+    void addInstrumentTrackForTest(
+        const engraving::InstrumentTrackId& instrumentTrackId,
+        muse::audio::TrackId trackId)
+    {
+        m_instrumentTrackIdMap[instrumentTrackId] = trackId;
+    }
+
+    FRIEND_TEST(Playback_UnmuteAndUnsoloTests, UnsoloChannelsTest);
+
 private:
+
     muse::audio::IPlayerPtr currentPlayer() const;
 
     notation::INotationPlaybackPtr notationPlayback() const;
@@ -190,8 +210,6 @@ private:
     void setMidiUseWrittenPitch(bool useWrittenPitch);
     void toggleLoopPlayback();
     void toggleHearPlaybackWhenEditing();
-    void unmuteAll();
-    void unsoloAll();
 
     void reloadPlaybackCache();
 

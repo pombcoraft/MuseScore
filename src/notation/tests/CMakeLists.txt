@@ -25,6 +25,8 @@ set(MODULE_TEST_SRC
     ${CMAKE_CURRENT_LIST_DIR}/mocks/notationinteractionmock.h
     ${CMAKE_CURRENT_LIST_DIR}/mocks/notationselectionmock.h
     ${CMAKE_CURRENT_LIST_DIR}/mocks/notationselectionrangemock.h
+    ${CMAKE_CURRENT_LIST_DIR}/mocks/notationmock.h
+    ${CMAKE_CURRENT_LIST_DIR}/mocks/notationsolomutestatemock.h
     ${CMAKE_CURRENT_LIST_DIR}/mocks/controlledviewmock.h
 )
 

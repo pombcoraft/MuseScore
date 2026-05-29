@@ -1,3 +1,4 @@
+
 # SPDX-License-Identifier: GPL-3.0-only
 # MuseScore-Studio-CLA-applies
 #
@@ -40,8 +41,11 @@ target_sources(playback PRIVATE
     internal/soundprofilesrepository.h
     internal/drumsetloader.cpp
     internal/drumsetloader.h
-    tests/unmuteAndUnsoloTest.qml
-    tests/unmuteUnsoloTest.cpp
+    
+    )
+
+target_link_libraries(playback PUBLIC
+    notationscene
 )
 
 if (MUE_BUILD_PLAYBACK_TESTS)

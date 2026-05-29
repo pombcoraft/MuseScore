@@ -97,7 +97,9 @@ public:
     MOCK_METHOD(muse::async::Notification, onlineSoundsChanged, (), (const, override));
     MOCK_METHOD(muse::Progress, onlineSoundsProcessingProgress, (), (const, override));
 
-    MOCK_METHOD(void, unmuteAll(), (), (override))
+    MOCK_METHOD(void, unmuteAll, (), ());
+    MOCK_METHOD(void, unsoloAll, (), ());
+
 };
 }
 
